@@ -31,7 +31,7 @@
                     android:layout_width="128dp"
                     android:layout_height="128dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_baseline_image_24" />
+                    android:src="@drawable/ic_baseline_image_search_24" />
 
             </androidx.cardview.widget.CardView>
 

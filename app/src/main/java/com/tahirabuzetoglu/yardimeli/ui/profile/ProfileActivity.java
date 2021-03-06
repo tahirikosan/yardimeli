@@ -111,6 +111,14 @@ public class ProfileActivity extends AppCompatActivity implements UserPostAdapte
             }
         });
 
+        ivUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ivOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

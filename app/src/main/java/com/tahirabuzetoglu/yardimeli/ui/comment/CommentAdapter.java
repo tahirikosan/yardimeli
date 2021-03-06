@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tahirabuzetoglu.yardimeli.R;
 import com.tahirabuzetoglu.yardimeli.data.entity.Comment;
+import com.tahirabuzetoglu.yardimeli.utils.SharedPrefData;
 
 import java.util.List;
 
@@ -38,9 +39,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     @Override
     public void onBindViewHolder(@NonNull CommentHolder holder, int position) {
 
+        SharedPrefData sharedPrefData = new SharedPrefData(context);
+        String userID = sharedPrefData.loadUser().getId();
+
         Comment currentComment = mCommentList.get(position);
         holder.tvOwnerName.setText(currentComment.getUsername() + " : ");
         holder.tvComment.setText(currentComment.getComment());
+
+        if(!userID.equals(currentComment.getUserID())){
+            holder.ibOptions.setVisibility(View.GONE);
+        }
 
     }
 

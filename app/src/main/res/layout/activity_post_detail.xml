@@ -5,167 +5,184 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginVertical="4dp">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="4dp">
+            android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:cardCornerRadius="24dp"
-                android:layout_margin="2dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="4dp">
 
-                <ImageView
-                    android:id="@+id/iv_owner_image"
+                <androidx.cardview.widget.CardView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher"/>
-            </androidx.cardview.widget.CardView>
+                    app:cardCornerRadius="24dp"
+                    android:layout_margin="2dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_marginTop="8dp">
+                    <ImageView
+                        android:id="@+id/iv_owner_image"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher"/>
+                </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/tv_post_owner"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="This is owner name"
-                    android:textColor="@color/colorDarkPurple"
-                    android:fontFamily="@font/helvetica_neue"
-                    android:textSize="12sp"
-                    android:layout_marginHorizontal="10dp"/>
-
-                <!--It is not active right now-->
-                <ImageButton
-                    android:id="@+id/ib_post_delete"
-                    android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:visibility="visible"
-                    android:layout_alignParentEnd="true"
-                    android:background="@drawable/ic_baseline_delete_24"/>
+                    android:layout_marginTop="8dp">
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_post_owner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="This is owner name"
+                        android:textColor="@color/colorDarkPurple"
+                        android:fontFamily="@font/helvetica_neue"
+                        android:textSize="16sp"
+                        android:layout_marginHorizontal="10dp"/>
 
-        </LinearLayout>
+                    <!--It is not active right now-->
+                    <ImageButton
+                        android:id="@+id/ib_post_delete"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:visibility="visible"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/ic_baseline_delete_24"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:layout_marginTop="2dp">
+                </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/iv_post_image"
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"/>
-        </androidx.cardview.widget.CardView>
+                android:layout_marginTop="2dp">
+
+                <ImageView
+                    android:id="@+id/iv_post_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="256dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background"/>
+            </androidx.cardview.widget.CardView>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Açıklama: "
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/helvetica_neue"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="2dp"/>
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_post_desc"
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Telefon: "
+                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_post_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="This is description"
+                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:textColor="@color/colorLightPurple"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp" />
+
+
+                <ImageButton
+                    android:id="@+id/ib_post_comment"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/ic_speech_bubble"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="This is description"
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/helvetica_neue"
-                android:textColor="@color/colorLightPurple"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Konum: "
+                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/tv_post_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Konum"
+                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:textColor="@color/colorLightPurple"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Açıklama: "
+                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="2dp"/>
+
+                <TextView
+                    android:id="@+id/tv_post_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This is description"
+                    android:paddingBottom="10dp"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:textColor="@color/colorLightPurple"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Telefon: "
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/helvetica_neue"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"/>
-
-            <TextView
-                android:id="@+id/tv_post_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="This is description"
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/helvetica_neue"
-                android:textColor="@color/colorLightPurple"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Konum: "
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/helvetica_neue"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"/>
-
-            <TextView
-                android:id="@+id/tv_post_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Konum"
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/helvetica_neue"
-                android:textColor="@color/colorLightPurple"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_delete_post_alert"
@@ -189,7 +206,7 @@
                 android:text="Postu silmek istediğinizden emin misiniz ? "
                 android:textColor="@color/colorDarkPurple"
                 android:textSize="20sp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -199,7 +216,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Geri"
-                android:textColor="@color/colorBlue"
                 android:textSize="24sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
@@ -228,14 +244,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ImageButton
-        android:id="@+id/ib_post_comment"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:background="@drawable/ic_speech_bubble"/>
 
 
 </RelativeLayout>

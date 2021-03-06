@@ -126,7 +126,7 @@ public class NewPostActivity extends AppCompatActivity {
     private void startPosting(){
 
         if(imageUri == null || description.isEmpty()){
-            Toast.makeText(this, "Please fill all inputs.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lütfen açıklama ve resim eklediğinizden emin olunuz", Toast.LENGTH_SHORT).show();
             return;
         }
 

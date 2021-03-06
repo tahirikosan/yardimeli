@@ -48,33 +48,42 @@ public class LoginActivity extends AppCompatActivity {
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Lütfen bekleyiniz");
+        progressDialog.setCancelable(false);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 String phoneNumber = etPhoneNumber.getText().toString();
                 if (phoneNumber.isEmpty())
-                    Toast.makeText(LoginActivity.this, "Enter your phone number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Lütfen telefon numaranızı giriniz", Toast.LENGTH_SHORT).show();
                 else {
+                    progressDialog.show();
                     //verify phone number
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             "+90"+phoneNumber, 60, TimeUnit.SECONDS, LoginActivity.this,
                             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                                 @Override
                                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                                    progressDialog.cancel();
                                     signInUser(phoneAuthCredential);
                                 }
 
                                 @Override
                                 public void onVerificationFailed(FirebaseException e) {
                                     Log.d(TAG, "onVerificationFailed:"+e.getLocalizedMessage());
+                                    Toast.makeText(LoginActivity.this, "Hatalı telefon numarası girdiniz", Toast.LENGTH_SHORT).show();
+                                    progressDialog.cancel();
                                 }
 
                                 @Override
                                 public void onCodeSent(final String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                     super.onCodeSent(verificationId, forceResendingToken);
-                                    //
+                                    progressDialog.cancel();
                                     Dialog dialog = new Dialog(LoginActivity.this);
+                                    dialog.setCancelable(false);
                                     dialog.setContentView(R.layout.verify_popup);
 
                                     final EditText etVerifyCode = dialog.findViewById(R.id.etVerifyCode);
@@ -111,6 +120,8 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             createUserInDB(etPhoneNumber.getText().toString().trim());
                         }else {
+                            progressDialog.cancel();
+                            Toast.makeText(LoginActivity.this, "Lütfen doğru kodu girdiğinizden emin olun", Toast.LENGTH_SHORT).show();
                             Log.d(TAG, "onComplete:"+task.getException().getLocalizedMessage());
                         }
                     }
