@@ -85,8 +85,8 @@ public class NewPostActivity extends AppCompatActivity {
 
     private void setTexts(){
         description = etDesc.getText().toString().trim();
-        phone = etLocation.getText().toString().trim();
-        location = etPhone.getText().toString().trim();
+        phone = etPhone.getText().toString().trim();
+        location = etLocation.getText().toString().trim();
     }
 
     private void setPostViewModel(){

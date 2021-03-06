@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/ic_helpful_hand"
     tools:context=".ui.main.FeedActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:textAlignment="center"
-        android:textColor="@color/LightPurple"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:text="@string/login_info"/>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="48dp"
+      android:gravity="center"
+      android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etPhoneNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:hint="55xxxxxxxx"
-        android:ems="10"
-        android:inputType="numberDecimal" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_gradient"
-        android:textColor="@color/white"
-        android:text="@string/login_btn_text" />
-</LinearLayout>
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="24dp"
+          android:textAlignment="center"
+          android:textColor="@color/DarkPurple"
+          android:textSize="16dp"
+          android:textStyle="bold"
+          android:text="@string/login_info"/>
+
+      <EditText
+          android:id="@+id/etPhoneNumber"
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:textAlignment="center"
+          android:background="@drawable/edit_text_bg"
+          android:hint="55xxxxxxxx"
+          android:ems="10"
+          android:layout_marginBottom="8dp"
+          android:inputType="numberDecimal" />
+
+      <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/btnLogin"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/btn_gradient"
+          android:textColor="@color/white"
+          android:text="@string/login_btn_text" />
+  </LinearLayout>
+
+</RelativeLayout>

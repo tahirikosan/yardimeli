@@ -133,7 +133,7 @@ public class PostRepository {
                         cloudPost.put("likes", likes);
                         cloudPost.put("date", createdAt);
                         cloudPost.put("location",location);
-                        cloudPost.put("phone", phone);
+                        cloudPost.put("phoneNumber", phone);
 
                         // insert post to db
                         newPostRef.set(cloudPost).addOnSuccessListener(new OnSuccessListener<Void>() {

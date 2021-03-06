@@ -9,6 +9,7 @@ import com.tahirabuzetoglu.yardimeli.data.entity.User;
 public class SharedPrefData {
     public static final String DATA = "DATA";
     public static final String USER = "USER";
+    public static final String INTRO = "INTRO";
 
     private Context context;
     private SharedPreferences sharedPreferences;
@@ -55,5 +56,14 @@ public class SharedPrefData {
         User user = gson.fromJson(json, User.class);
 
         return user;
+    }
+
+    public void userSawIntro(){
+        editor.putBoolean(INTRO, true);
+        editor.commit();
+    }
+
+    public Boolean isSawIntro(){
+       return sharedPreferences.getBoolean(INTRO, false);
     }
 }

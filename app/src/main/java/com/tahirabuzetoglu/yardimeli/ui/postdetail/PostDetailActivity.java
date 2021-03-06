@@ -44,8 +44,6 @@ public class PostDetailActivity extends AppCompatActivity {
     private TextView tvDeletePost;
     private ImageButton ibCommentPost;
     private ImageButton ibPostDelete;
-    private EditText etComment;
-    private Button btnInsertComment;
     private CardView cvDeletePostAlert;
     private ProgressDialog progressDialog;
 
@@ -150,8 +148,6 @@ public class PostDetailActivity extends AppCompatActivity {
         tvDeletePost = findViewById(R.id.tv_delete);
         ibCommentPost = findViewById(R.id.ib_post_comment);
         ibPostDelete = findViewById(R.id.ib_post_delete);
-        etComment = findViewById(R.id.et_comment);
-        btnInsertComment = findViewById(R.id.btn_insert_comment);
         cvDeletePostAlert = findViewById(R.id.cv_delete_post_alert);
     }
 
@@ -164,7 +160,7 @@ public class PostDetailActivity extends AppCompatActivity {
         tvUserName.setText(post.getOwnerName());
         tvDescription.setText(post.getDescription());
         tvPostLocation.setText(post.getLocation());
-        tvPostLocation.setText(post.getPhoneNumber());
+        tvPostPhone.setText(post.getPhoneNumber());
     }
 
     private void setPostViewModel(){

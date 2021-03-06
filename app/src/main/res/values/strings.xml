@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">yardimeli</string>
     <string name="verification_code_input">Kodu Giriniz</string>
-    <string name="verification_info">Lütfen SMS olarak gelen şifreyi giriniz</string>
+    <string name="verification_info">Lütfen SMS olarak gelen kodu giriniz</string>
     <string name="login_info">Lütfen telefon numaranızı başında 0 olmadan giriniz</string>
     <string name="login_btn_text">Giriş</string>
 </resources>
