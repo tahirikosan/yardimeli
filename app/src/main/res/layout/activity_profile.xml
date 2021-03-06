@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Profil Elements-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--User Photo-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_user_photo"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="4dp"
+                android:padding="8dp"
+                android:layout_centerHorizontal="true"
+                app:cardCornerRadius="64dp">
+
+                <ImageView
+                    android:id="@+id/iv_user_photo"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:src="@mipmap/ic_launcher" />
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <ImageView
+                android:id="@+id/iv_options"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                android:layout_alignParentEnd="true"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="12dp"
+            android:orientation="horizontal">
+
+            <!--User Name-->
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futurab"
+                android:maxLength="20"
+                android:text="Admin Android"
+                android:textColor="@color/colorDarkPurple"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_edit_profile"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_alignParentEnd="true"/>
+
+        </LinearLayout>
+
+
+        <!--User Bio-->
+        <TextView
+            android:id="@+id/tv_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:maxLength="60"
+            android:text="İstanbul Üniversitesi Bilgisayar Mühendsiliği"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <!--Post Mode-->
+        <RelativeLayout
+            android:id="@+id/layout_posts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_user_posts"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_warning_no_publication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:text="Ops! henüz birşey paylaşmadın"
+                android:textColor="@color/colorDarkPurple"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <!--Options Panel-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_profile_options_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:background="@color/colorLightWhite"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            app:layout_insetEdge="bottom">
+
+
+            <TextView
+                android:id="@+id/tv_account_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginVertical="24dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/helvetica_neue"
+                android:layout_gravity="center_vertical"
+                android:textStyle="normal"
+                android:textColor="@color/colorLightPurple"
+                android:text="Hesap Ayarları"/>
+
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/ns_view_account"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_below="@id/tv_account_settings">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="24dp"
+                            android:src="@drawable/ic_baseline_security_24"/>
+
+                        <TextView
+                            android:id="@+id/tv_language"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="24dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="normal"
+                            android:textColor="@color/colorDarkPurple"
+                            android:text="Şifre değiş"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="24dp"
+                            android:src="@drawable/ic_baseline_mail_24"/>
+
+                        <TextView
+                            android:id="@+id/tv_change_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="24dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="normal"
+                            android:textColor="@color/colorDarkPurple"
+                            android:text="Email Değiş"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="24dp"
+                            android:src="@drawable/ic_baseline_power_settings_new_24"/>
+
+                        <TextView
+                            android:id="@+id/tv_logout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="24dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="normal"
+                            android:textColor="@color/colorDarkPurple"
+                            android:text="Çıkış"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+
+            <ImageView
+                android:id="@+id/iv_close_options"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</RelativeLayout>

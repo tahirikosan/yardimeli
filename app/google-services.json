@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950949681554",
+    "project_id": "yardimeli-bb08d",
+    "storage_bucket": "yardimeli-bb08d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950949681554:android:694ce3dd8a1f98b6c5c94b",
+        "android_client_info": {
+          "package_name": "com.tahirabuzetoglu.yardimeli"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950949681554-mbuf2rb0emc4pi37lcpbauuttvjvtn5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA5W32pCjXtJjO5PAa6s2wPntyOhfUyZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950949681554-mbuf2rb0emc4pi37lcpbauuttvjvtn5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

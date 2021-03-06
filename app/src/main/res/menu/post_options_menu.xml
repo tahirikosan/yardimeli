@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/report_post"
+        android:title="Report Post"
+        android:icon="@drawable/ic_baseline_report_24"/>
+
+    <item android:id="@+id/delete_post"
+        android:title="Delete Post"
+        android:icon="@drawable/ic_baseline_delete_24"/>
+</menu>
