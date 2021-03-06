@@ -20,12 +20,19 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.tahirabuzetoglu.yardimeli.R;
 import com.tahirabuzetoglu.yardimeli.data.entity.Post;
+import com.tahirabuzetoglu.yardimeli.data.entity.User;
 import com.tahirabuzetoglu.yardimeli.ui.comment.CommentActivity;
 import com.tahirabuzetoglu.yardimeli.ui.main.newpost.NewPostActivity;
+import com.tahirabuzetoglu.yardimeli.ui.other_user.OtherUserProfileActivity;
+import com.tahirabuzetoglu.yardimeli.ui.postdetail.PostDetailActivity;
 import com.tahirabuzetoglu.yardimeli.ui.profile.ProfileActivity;
+import com.tahirabuzetoglu.yardimeli.utils.SharedPrefData;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.tahirabuzetoglu.yardimeli.ui.liked.LikedPostsActivity.OTHER_USER_ID;
+import static com.tahirabuzetoglu.yardimeli.ui.other_user.OtherUserProfileActivity.TRANSFERED_POST;
 
 public class FeedActivity extends AppCompatActivity  implements PostAdapter.OnItemClickListener{
 
@@ -38,8 +45,12 @@ public class FeedActivity extends AppCompatActivity  implements PostAdapter.OnIt
     private ProgressDialog progressDialog;
     private ImageView ivGoProfile;
 
+    private SharedPrefData sharedPrefData;
+    private User user;
     private PostViewModel postViewModel;
     private List<Post> postList = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +63,9 @@ public class FeedActivity extends AppCompatActivity  implements PostAdapter.OnIt
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         progressDialog = new ProgressDialog(this);
+
+        sharedPrefData = new SharedPrefData(this);
+        user = sharedPrefData.loadUser();
 
         setPostViewModel();
         getPosts();
@@ -120,20 +134,24 @@ public class FeedActivity extends AppCompatActivity  implements PostAdapter.OnIt
         if(postList.get(position).isUserLiked()){
             //unsave the post
             postViewModel.dislikePost(postList.get(position));
+            imageButton.setImageResource(R.drawable.ic_heart_black);
+            textView.setText((postList.get(position).getLikeCount() - 1) + " beğenme");
         }else{
             postViewModel.likePost(postList.get(position));
+            imageButton.setImageResource(R.drawable.ic_heart_red);
+            textView.setText((postList.get(position).getLikeCount() + 1) + " beğenme");
         }
 
         postViewModel.handleLikeLive.observe(this, new Observer<Post>() {
             @Override
             public void onChanged(Post post) {
                 if(post.isSuccess()){
-                    if(post.isUserLiked()){
+                    /*if(post.isUserLiked()){
                         imageButton.setImageResource(R.drawable.ic_heart_red);
                     }else{
                         imageButton.setImageResource(R.drawable.ic_heart_black);
                     }
-                    textView.setText(post.getLikeCount() + " beğenme");
+                    textView.setText(post.getLikeCount() + " beğenme");*/
                 }else{
                     Toast.makeText(FeedActivity.this, "Bir hata oluştu lütfen bizimle iletişime geçiniz", Toast.LENGTH_SHORT).show();
                 }
@@ -154,6 +172,23 @@ public class FeedActivity extends AppCompatActivity  implements PostAdapter.OnIt
 
     @Override
     public void onOwnerImageClicked(int position) {
+        String ownerId = postList.get(position).getOwnerID();
 
+        if(ownerId.equals(user.getId())){
+            Intent startProfileFragment = new Intent(FeedActivity.this, ProfileActivity.class);
+            startActivity(startProfileFragment);
+        }else{
+            Intent intent = new Intent(FeedActivity.this, OtherUserProfileActivity.class);
+            intent.putExtra(OTHER_USER_ID , postList.get(position).getOwnerID());
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onPostClicked(int position) {
+        Post post = postList.get(position);
+        Intent intent = new Intent(FeedActivity.this, PostDetailActivity.class);
+        intent.putExtra(TRANSFERED_POST, post);
+        startActivity(intent);
     }
 }

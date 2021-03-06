@@ -234,24 +234,9 @@ public class ProfileRepository {
 
         User user = new User();
         try {
-            db.collection("users")
-                    .document(auth.getCurrentUser().getUid())
-                    .update("online", false)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            auth.signOut();
-                            user.setLogOut(true);
-                            userLive.setValue(user);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.v("Error log out: ", e.getMessage());
-                    user.setLogOut(false);
-                    userLive.setValue(user);
-                }
-            });
+            auth.signOut();
+            user.setLogOut(true);
+            userLive.setValue(user);
         } catch (Exception e) {
             Log.v("Error log out: ", e.getMessage());
             user.setLogOut(false);

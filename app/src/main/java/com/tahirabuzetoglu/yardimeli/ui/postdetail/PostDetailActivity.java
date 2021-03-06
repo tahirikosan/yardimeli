@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.squareup.picasso.Picasso;
 import com.tahirabuzetoglu.yardimeli.R;
 import com.tahirabuzetoglu.yardimeli.data.entity.Post;
@@ -27,6 +30,7 @@ import static com.tahirabuzetoglu.yardimeli.ui.main.FeedActivity.COMMENT_POST;
 public class PostDetailActivity extends AppCompatActivity {
 
     private static final String USER_POST = "USER_POST";
+    private static final String TRANSFERED_POST = "TRANSFERED_POST";
 
     private Post post;
 
@@ -34,6 +38,8 @@ public class PostDetailActivity extends AppCompatActivity {
     private ImageView ivPostImage;
     private TextView tvUserName;
     private TextView tvDescription;
+    private TextView tvPostPhone;
+    private TextView tvPostLocation;
     private TextView tvCancelDeleting;
     private TextView tvDeletePost;
     private ImageButton ibCommentPost;
@@ -44,6 +50,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private PostViewModel postViewModel;
+    private boolean isObserve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +61,16 @@ public class PostDetailActivity extends AppCompatActivity {
         setPostViewModel();
 
         Intent intent = getIntent();
-        post = (Post) intent.getSerializableExtra(USER_POST);
+        if(intent.getSerializableExtra(USER_POST) != null ){
+            post = (Post)intent.getSerializableExtra(USER_POST);
+            isObserve = false;
+        }else{
+            post = (Post)intent.getSerializableExtra(TRANSFERED_POST);
+            isObserve = true;
+        }
+
         setPostUI(post);
+        handleDeleteIcon();
 
         ibPostDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +96,8 @@ public class PostDetailActivity extends AppCompatActivity {
         ibCommentPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                YoYo.with(Techniques.BounceInUp).duration(1000).repeat(1).playOn(ibCommentPost);
+
                 Intent intent = new Intent(PostDetailActivity.this, CommentActivity.class);
                 intent.putExtra(COMMENT_POST, post);
                 startActivity(intent);
@@ -88,6 +105,14 @@ public class PostDetailActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void handleDeleteIcon(){
+        if(isObserve){
+            ibPostDelete.setVisibility(View.GONE);
+        }else{
+            ibPostDelete.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -119,6 +144,8 @@ public class PostDetailActivity extends AppCompatActivity {
         ivPostImage = findViewById(R.id.iv_post_image);
         tvUserName = findViewById(R.id.tv_post_owner);
         tvDescription = findViewById(R.id.tv_post_desc);
+        tvPostPhone = findViewById(R.id.tv_post_phone);
+        tvPostLocation = findViewById(R.id.tv_post_location);
         tvCancelDeleting = findViewById(R.id.tv_cancel_delete);
         tvDeletePost = findViewById(R.id.tv_delete);
         ibCommentPost = findViewById(R.id.ib_post_comment);
@@ -136,6 +163,8 @@ public class PostDetailActivity extends AppCompatActivity {
 
         tvUserName.setText(post.getOwnerName());
         tvDescription.setText(post.getDescription());
+        tvPostLocation.setText(post.getLocation());
+        tvPostLocation.setText(post.getPhoneNumber());
     }
 
     private void setPostViewModel(){

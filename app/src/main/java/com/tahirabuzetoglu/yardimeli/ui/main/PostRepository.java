@@ -101,7 +101,7 @@ public class PostRepository {
     }
 
     // insert a new post to firebase
-    public MutableLiveData<Post> insertPost(Uri imageUri, String description){
+    public MutableLiveData<Post> insertPost(Uri imageUri, String description, String phone, String location){
         MutableLiveData<Post> newPostLive = new MutableLiveData<>();
 
         // prepare post reference for inserting to db
@@ -132,6 +132,8 @@ public class PostRepository {
                         cloudPost.put("ownerName", currentUser.getName());
                         cloudPost.put("likes", likes);
                         cloudPost.put("date", createdAt);
+                        cloudPost.put("location",location);
+                        cloudPost.put("phone", phone);
 
                         // insert post to db
                         newPostRef.set(cloudPost).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,7 +149,9 @@ public class PostRepository {
                                         currentUser.getImageUrl(),
                                         description,
                                         likes,
-                                        createdAt
+                                        createdAt,
+                                        location,
+                                        phone
                                 );
                                 newPost.setSuccess(true);
                                 newPostLive.setValue(newPost);
@@ -182,7 +186,7 @@ public class PostRepository {
     public MutableLiveData<Post> deletePost(Post post){
         MutableLiveData<Post> deletedPostLive = new MutableLiveData<>();
 
-        StorageReference imageRef = mStoragePostImages.child(post.getId() + ".jpg");
+        StorageReference imageRef = mStoragePostImages.child(post.getId()+ ".jpg");
 
         imageRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -194,26 +198,28 @@ public class PostRepository {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 
-                                db.collection("comments")
-                                        .document(post.getId())
-                                        .delete()
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                db.collection("likedPosts")
+                                        .document(currentUser.getId())
+                                        .update("postIDs", FieldValue.arrayRemove(post.getId()))
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Post post = new Post();
-                                                    post.setSuccess(true);
-                                                    deletedPostLive.setValue(post);
-                                                }
+                                            public void onSuccess(Void aVoid) {
+
+                                                db.collection("comments")
+                                                        .document(post.getId())
+                                                        .delete()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if(task.isSuccessful()){
+                                                                    post.setSuccess(true);
+                                                                    deletedPostLive.setValue(post);
+                                                                }
+                                                            }
+                                                        });
+
                                             }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Post post = new Post();
-                                        post.setSuccess(false);
-                                        deletedPostLive.setValue(post);
-                                    }
-                                });
+                                        });
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -243,6 +249,91 @@ public class PostRepository {
     public MutableLiveData<Post> likePost(Post post){
         MutableLiveData<Post> savedPostLive = new MutableLiveData<>();
 
+        // prepare post reference for inserting to db
+        DocumentReference savedPostRef =  db.collection("likedPosts").document(currentUser.getId());
+
+        savedPostRef.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if(task.getResult().get("postIDs") != null){
+                            //if doc exist just update postIDs
+                            savedPostRef.update("postIDs", FieldValue.arrayUnion(post.getId()))
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+
+                                                //add user id to post's saved list in firestore db
+                                                db.collection("posts")
+                                                        .document(post.getId())
+                                                        .update("likes", FieldValue.arrayUnion(currentUser.getId().trim()))
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                post.setSuccess(true);
+                                                                post.setUserLiked(true);
+                                                                post.setLikeCount(post.getLikeCount() + 1);
+                                                                savedPostLive.setValue(post);
+                                                            }
+                                                        });
+                                            }else{
+                                                Log.v("Task Error Like Post ID", task.getException().getMessage());
+                                                post.setSuccess(false);
+                                                savedPostLive.setValue(post);
+                                            }
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.v("Exception Like Post ID", e.getMessage());
+                                    post.setSuccess(false);
+                                    savedPostLive.setValue(post);
+                                }
+                            });
+                        }else{
+                            List<String> postIDs = new ArrayList<>();
+                            postIDs.add(0, post.getId());
+
+                            Map<String, Object> savedPost = new HashMap<>();
+                            savedPost.put("postIDs", postIDs);
+
+                            savedPostRef.set(savedPost, SetOptions.merge())
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Log.v("SUCCES : ", "New likedPosts created");
+                                            post.setSuccess(true);
+                                            savedPostLive.setValue(post);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.v("Failure : ", "New likedPosts did not created");
+                                    post.setSuccess(false);
+                                    savedPostLive.setValue(post);
+                                }
+                            });
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.v("Failure : ", "New likedPosts did not created");
+                post.setSuccess(false);
+                savedPostLive.setValue(post);
+            }
+        });
+
+
+
+
+        return savedPostLive;
+
+
+        /*MutableLiveData<Post> savedPostLive = new MutableLiveData<>();
+
         //add user id to post's saved list in firestore db
         db.collection("posts")
                 .document(post.getId())
@@ -258,27 +349,49 @@ public class PostRepository {
                 });
 
 
-        return savedPostLive;
+        return savedPostLive;*/
     }
 
     // dislike post from firestore
     public MutableLiveData<Post> dislikePost(Post post){
+
         MutableLiveData<Post> postLive = new MutableLiveData<>();
 
-
-        //remove user id to post's saved list in firestore db
-        db.collection("posts")
-                .document(post.getId())
-                .update("likes", FieldValue.arrayRemove(currentUser.getId()))
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("likedPosts")
+                .document(currentUser.getId())
+                .update("postIDs", FieldValue.arrayRemove(post.getId()))
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        post.setSuccess(true);
-                        post.setUserLiked(false);
-                        post.setLikeCount(post.getLikeCount() - 1);
-                        postLive.setValue(post);
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+
+                            //add user id to post's saved list in firestore db
+                            db.collection("posts")
+                                    .document(post.getId())
+                                    .update("likes", FieldValue.arrayRemove(currentUser.getId()))
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            post.setSuccess(true);
+                                            post.setUserLiked(false);
+                                            post.setLikeCount(post.getLikeCount() - 1);
+                                            postLive.setValue(post);
+                                        }
+                                    });
+                        }else{
+                            Log.v("dislike post error:", task.getException().getMessage());
+                            post.setSuccess(false);
+                            postLive.setValue(post);
+                        }
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.v("dislike post error:", e.getMessage());
+                post.setSuccess(false);
+                postLive.setValue(post);
+            }
+        });
 
         return postLive;
     }
@@ -312,6 +425,7 @@ public class PostRepository {
                                                             DocumentSnapshot documentSnapshot = task.getResult();
 
                                                             Post post = documentSnapshot.toObject(Post.class);
+                                                            post.setLikeCount(post.getLikes().size());
                                                             post.setSuccess(true);
                                                             post.setUserLiked(true);
                                                             postList.add(post);

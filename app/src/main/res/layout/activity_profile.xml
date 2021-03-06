@@ -30,7 +30,8 @@
                     android:id="@+id/iv_user_photo"
                     android:layout_width="128dp"
                     android:layout_height="128dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_baseline_image_24" />
 
             </androidx.cardview.widget.CardView>
 
@@ -60,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/futurab"
-                android:maxLength="20"
+                android:textAlignment="center"
                 android:text="Admin Android"
                 android:textColor="@color/colorDarkPurple"
                 android:textSize="16sp"
@@ -85,7 +86,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/helvetica_neue"
-            android:maxLength="60"
+            android:textAlignment="center"
             android:text="İstanbul Üniversitesi Bilgisayar Mühendsiliği"
             android:textColor="@color/colorGray"
             android:textSize="12sp" />
@@ -220,6 +221,32 @@
                             android:textStyle="normal"
                             android:textColor="@color/colorDarkPurple"
                             android:text="Email Değiş"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="24dp"
+                            android:src="@drawable/ic_baseline_favorite_24"/>
+
+                        <TextView
+                            android:id="@+id/tv_liked_posts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="24dp"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="normal"
+                            android:textColor="@color/colorDarkPurple"
+                            android:text="Beğenilenler"/>
 
                     </LinearLayout>
 

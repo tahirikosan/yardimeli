@@ -31,6 +31,7 @@ import com.tahirabuzetoglu.yardimeli.R;
 import com.tahirabuzetoglu.yardimeli.data.entity.Post;
 import com.tahirabuzetoglu.yardimeli.data.entity.User;
 import com.tahirabuzetoglu.yardimeli.ui.edit_profile.EditProfileActivity;
+import com.tahirabuzetoglu.yardimeli.ui.liked.LikedPostsActivity;
 import com.tahirabuzetoglu.yardimeli.ui.main.FeedActivity;
 import com.tahirabuzetoglu.yardimeli.ui.main.PostViewModel;
 import com.tahirabuzetoglu.yardimeli.ui.postdetail.PostDetailActivity;
@@ -50,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity implements UserPostAdapte
     private ImageView ivOptions;
     private ImageView ivCloseOptions;
     private ImageView ivEditProfile;
+    private TextView tvLiked;
     private TextView tvBiyo;
     private TextView tvName;
     private TextView tvLogOut;
@@ -87,6 +89,7 @@ public class ProfileActivity extends AppCompatActivity implements UserPostAdapte
         tvBiyo = findViewById(R.id.tv_bio);
         tvName = findViewById(R.id.tv_name);
         tvLogOut = findViewById(R.id.tv_logout);
+        tvLiked = findViewById(R.id.tv_liked_posts);
         tvWarningNoPublication = findViewById(R.id.tv_warning_no_publication);
         progressDialog = new ProgressDialog(this);
 
@@ -128,6 +131,15 @@ public class ProfileActivity extends AppCompatActivity implements UserPostAdapte
             @Override
             public void onClick(View view) {
                 logOut();
+            }
+        });
+
+        tvLiked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, LikedPostsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
@@ -200,10 +212,10 @@ public class ProfileActivity extends AppCompatActivity implements UserPostAdapte
             @Override
             public void onChanged(User user) {
                 if(user.isLogOut()){
-                    Intent intent = new Intent(ProfileActivity.this, SplashActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                   Intent intent = new Intent(ProfileActivity.this, SplashActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    finish();
+                    finishAffinity();
                 }else{
                     Toast.makeText(ProfileActivity.this, "Could not log out, please try again", Toast.LENGTH_SHORT).show();
                 }
@@ -215,7 +227,7 @@ public class ProfileActivity extends AppCompatActivity implements UserPostAdapte
     private void setUserUI(User user){
 
         if(user.getImageUrl().equals("default")){
-            ivUser.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_star_24));
+            ivUser.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_image_24));
         }else{
             Picasso.get().load(user.getImageUrl()).into(ivUser);
         }

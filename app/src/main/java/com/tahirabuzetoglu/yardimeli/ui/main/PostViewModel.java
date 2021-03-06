@@ -40,8 +40,8 @@ public class PostViewModel extends AndroidViewModel {
     }
 
     // insert a new post to posts Collection firestore db
-    public void insertPost(Uri imageUri, String description){
-        newPost = repository.insertPost(imageUri, description);
+    public void insertPost(Uri imageUri, String description, String phone, String location){
+        newPost = repository.insertPost(imageUri, description, phone, location);
     }
 
    // delete post from firestore
@@ -49,11 +49,11 @@ public class PostViewModel extends AndroidViewModel {
         deletedPostLive = repository.deletePost(post);
     }
 
-   /* // get user liked posts posts collection firestore db
+    // get user liked posts posts collection firestore db
     public void getPostListLiked(){
         likedPostList = repository.getPostListLiked();
     }
-*/
+
     // dislike the post
     public void dislikePost(Post currentPost){
         handleLikeLive = repository.dislikePost(currentPost);

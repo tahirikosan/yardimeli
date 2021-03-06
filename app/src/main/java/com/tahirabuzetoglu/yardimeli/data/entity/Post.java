@@ -17,6 +17,8 @@ public class Post implements Serializable {
     private List<String> likes;
     private Map<String, Map<String, List<String>>> Comments;
     private Double date;
+    private String location;
+    private String phoneNumber;
     @Exclude
     private boolean success;
     @Exclude
@@ -31,7 +33,7 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(String id, String ownerID, String ownerName, String imageUrl, String ownerImageUrl, String description, List<String> likes, Double date) {
+    public Post(String id, String ownerID, String ownerName, String imageUrl, String ownerImageUrl, String description, List<String> likes, Double date, String location, String phoneNumber) {
         this.id = id;
         this.ownerID = ownerID;
         this.ownerName = ownerName;
@@ -40,6 +42,24 @@ public class Post implements Serializable {
         this.description = description;
         this.likes = likes;
         this.date = date;
+        this.location = location;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getId() {

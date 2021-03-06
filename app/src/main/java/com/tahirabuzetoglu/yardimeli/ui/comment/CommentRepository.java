@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.tahirabuzetoglu.yardimeli.data.entity.Comment;
 import com.tahirabuzetoglu.yardimeli.data.entity.User;
@@ -43,6 +44,7 @@ public class CommentRepository {
         db.collection("comments")
                 .document(postId)
                 .collection("comment")
+                .orderBy("date", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

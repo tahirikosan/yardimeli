@@ -9,6 +9,15 @@
     android:padding="16dp"
     tools:context=".ui.main.FeedActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textAlignment="center"
+        android:textColor="@color/LightPurple"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="@string/login_info"/>
 
     <EditText
         android:id="@+id/etPhoneNumber"
@@ -25,5 +34,5 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_gradient"
         android:textColor="@color/white"
-        android:text="Giriş" />
+        android:text="@string/login_btn_text" />
 </LinearLayout>

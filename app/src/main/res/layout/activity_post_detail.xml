@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginVertical="4dp">
 
@@ -74,34 +74,95 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:layout_marginLeft="20dp"
-            android:padding="2dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/ib_post_comment"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/ic_speech_bubble"
-                android:scaleType="centerCrop" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Açıklama: "
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="2dp"/>
+
+            <TextView
+                android:id="@+id/tv_post_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is description"
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/colorLightPurple"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/tv_post_desc"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is description"
-            android:paddingBottom="10dp"
-            android:fontFamily="@font/helvetica_neue"
-            android:textColor="@color/colorLightPurple"
-            android:textSize="12sp"
-            android:layout_marginTop="2dp"
-            android:layout_marginHorizontal="20dp"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Telefon: "
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_post_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is description"
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/colorLightPurple"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Konum: "
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_post_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Konum"
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/colorLightPurple"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -166,6 +227,15 @@
 
 
     </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/ib_post_comment"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/ic_speech_bubble"/>
 
 
 </RelativeLayout>

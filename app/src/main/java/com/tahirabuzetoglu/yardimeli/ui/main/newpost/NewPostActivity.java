@@ -33,11 +33,15 @@ public class NewPostActivity extends AppCompatActivity {
 
     private ImageButton imageButton;
     private EditText etDesc;
+    private EditText etLocation;
+    private EditText etPhone;
     private Button btnPost;
     private ProgressDialog progressDialog;
 
     private Uri imageUri;
     private String description;
+    private String phone;
+    private String location;
 
     private PostViewModel postViewModel;
 
@@ -72,6 +76,8 @@ public class NewPostActivity extends AppCompatActivity {
     private void setUIComponents(){
         imageButton = findViewById(R.id.ib_new_post);
         etDesc = findViewById(R.id.et_desc);
+        etLocation = findViewById(R.id.et_location);
+        etPhone = findViewById(R.id.et_phone);
         btnPost = findViewById(R.id.btn_post);
 
         progressDialog = new ProgressDialog(this);
@@ -79,6 +85,8 @@ public class NewPostActivity extends AppCompatActivity {
 
     private void setTexts(){
         description = etDesc.getText().toString().trim();
+        phone = etLocation.getText().toString().trim();
+        location = etPhone.getText().toString().trim();
     }
 
     private void setPostViewModel(){
@@ -124,7 +132,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         showProgressDialog();
 
-        postViewModel.insertPost(imageUri, description);
+        postViewModel.insertPost(imageUri, description, phone, location);
         postViewModel.newPost.observe(this, new Observer<Post>() {
             @Override
             public void onChanged(Post post) {

@@ -126,6 +126,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
                 }
             });
 
+            ivPicture.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mListener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            mListener.onPostClicked(position);
+                        }
+                    }
+                }
+            });
+
 
         }
     }
@@ -154,6 +166,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         void onLikeButtonClicked(int position, ImageButton imageButton, TextView textView);
         void onCommentButtonClicked(int position);
         void onOwnerImageClicked(int position);
+        void onPostClicked(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){

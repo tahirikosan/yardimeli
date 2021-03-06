@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Profil Elements-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--User Photo-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_user_photo"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="4dp"
+                android:layout_centerHorizontal="true"
+                app:cardCornerRadius="64dp">
+
+                <ImageView
+                    android:id="@+id/iv_user_photo"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_image_24" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!--Send message button-->
+            <ImageButton
+                android:id="@+id/ib_show_location"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="gone"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="2dp"
+                android:layout_alignParentEnd="true"
+                android:text="Send Message"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/ic_baseline_location_on_24"/>
+
+            <!--Send follow button-->
+            <ImageButton
+                android:id="@+id/ib_show_phone"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="gone"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/ib_show_location"
+                android:text="Follow"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/ic_baseline_phone_24"/>
+
+        </RelativeLayout>
+
+        <!--User Name-->
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:textAlignment="center"
+            android:text="Admin Android"
+            android:textColor="@color/colorDarkPurple"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!--User Bio-->
+        <TextView
+            android:id="@+id/tv_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/helvetica_neue"
+            android:textAlignment="center"
+            android:text="İstanbul Üniversitesi Bilgisayar Mühendsiliği"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray" />
+
+        <!--Post Mode-->
+        <RelativeLayout
+            android:id="@+id/layout_posts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_user_posts"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tv_warning_no_publication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:text="Ops! User hasn't published anything yet."
+                android:textColor="@color/colorDarkPurple"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <!--description Panel-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="24dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_botom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            app:layout_insetEdge="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:outlineSpotShadowColor="@color/colorWhite"
+                    app:cardBackgroundColor="@color/colorUltraLightGray"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_sheet_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:maxLength="20"
+                            android:text="Telefon No"
+                            android:textColor="@color/colorDarkPurple"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_sheet_subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginHorizontal="12dp"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:text="555 555 55 55"
+                            android:textColor="@color/colorGray"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_close_decs_pane"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:text="Tamam"
+                    android:background="@drawable/btn_gradient"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/helvetica_neue"
+                    android:layout_marginBottom="24dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>

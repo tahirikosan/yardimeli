@@ -13,6 +13,8 @@
         android:theme="@style/Theme.Yardimeli">
         <activity android:name=".ui.postdetail.PostDetailActivity"></activity>
         <activity android:name=".ui.edit_profile.EditProfileActivity"></activity>
+        <activity android:name=".ui.liked.LikedPostsActivity"></activity>
+        <activity android:name=".ui.other_user.OtherUserProfileActivity"></activity>
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity
             android:name=".ui.comment.CommentActivity"
@@ -20,7 +22,7 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".ui.main.newpost.NewPostActivity" />
+        <activity android:name=".ui.main.newpost.NewPostActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.main.FeedActivity" />
         <activity android:name=".ui.splash.SplashActivity">

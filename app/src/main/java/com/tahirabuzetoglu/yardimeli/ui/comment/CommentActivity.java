@@ -148,7 +148,7 @@ public class CommentActivity extends AppCompatActivity implements CommentAdapter
                 public void onChanged(Comment comment) {
                     if(comment.isSuccess()){
                         // add comment into recycler view
-                        mCommentList.add(comment);
+                        mCommentList.add(0, comment);
                         setCommentAdapter(mCommentList);
 
                         //progressDialog.dismiss();

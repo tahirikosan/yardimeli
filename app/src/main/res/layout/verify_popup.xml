@@ -6,6 +6,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/LightPurple"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:text="@string/verification_info"/>
+
     <EditText
         android:id="@+id/etVerifyCode"
         android:layout_width="match_parent"
@@ -19,5 +28,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_gradient"
         android:textColor="@color/white"
-        android:text="Doğrulama Kodu" />
+        android:textAllCaps="false"
+        android:text="@string/verification_code_input" />
 </LinearLayout>
