@@ -34,8 +34,6 @@ import static com.tahirabuzetoglu.yardimeli.ui.other_user.OtherUserProfileActivi
 public class LikedPostsActivity extends AppCompatActivity implements PostAdapter.OnItemClickListener {
 
     public static final String OTHER_USER_ID = "OTHER_USER_ID";
-    public static final String START_PROFILE_FRAGMENT = "START_PROFILE_FRAGMENT";
-    public static final String LIKED_POSTS = "LIKED_POSTS";
 
     private TextView tvNoLikedPostsWarning;
 

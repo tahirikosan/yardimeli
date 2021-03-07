@@ -51,6 +51,17 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="4dp"
+            android:textStyle="bold"
+            android:text="07/03/2020"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="384dp"
@@ -123,6 +134,7 @@
             android:layout_height="wrap_content"
             android:text="This is description"
             android:paddingBottom="10dp"
+            android:maxLines="10"
             android:fontFamily="@font/helvetica_neue"
             android:textColor="@color/colorLightPurple"
             android:textSize="15sp"

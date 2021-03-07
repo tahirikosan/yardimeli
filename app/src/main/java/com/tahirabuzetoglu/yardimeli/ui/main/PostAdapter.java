@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 import com.tahirabuzetoglu.yardimeli.R;
 import com.tahirabuzetoglu.yardimeli.data.entity.Post;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
@@ -56,6 +58,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         // set images
         setPicture(currentPost, holder);
         setLikeBtnColor(currentPost, holder);
+        setDate(currentPost, holder);
+
 
 
         // changeLikeBtnColor(position);
@@ -72,7 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         private TextView tvDescription;
         private TextView tvOwner;
         private TextView tvLikeCount;
-        private TextView tvCommentCount;
+        private TextView tvDate;
         private ImageView ivPicture;
         private ImageView ivOwner;
         private ImageButton ibLike;
@@ -84,7 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
             tvDescription = itemView.findViewById(R.id.tv_post_desc);
             tvOwner = itemView.findViewById(R.id.tv_post_owner);
             tvLikeCount = itemView.findViewById(R.id.tv_like_count);
-            tvCommentCount = itemView.findViewById(R.id.tv_comment_count);
+            tvDate = itemView.findViewById(R.id.tv_date);
             ivPicture = itemView.findViewById(R.id.iv_post_image);
             ivOwner = itemView.findViewById(R.id.iv_owner_image);
             ibLike = itemView.findViewById(R.id.ib_post_like);
@@ -158,6 +162,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
             }else{
                 holder.ibLike.setImageResource(R.drawable.ic_heart_black);
             }
+        }
+    }
+
+    public void setDate(Post post, PostHolder holder){
+        holder.tvDate.setText(getDate(post.getDate()));
+    }
+
+    private String getDate(long timeStamp){
+
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date netDate = (new Date(timeStamp));
+            return sdf.format(netDate);
+        }
+        catch(Exception ex){
+            return "Tarih getirilemedi";
         }
     }
 

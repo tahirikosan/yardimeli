@@ -28,6 +28,8 @@ import com.tahirabuzetoglu.yardimeli.data.entity.User;
 import com.tahirabuzetoglu.yardimeli.utils.SharedPrefData;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +123,8 @@ public class PostRepository {
 
                         //user who liked the post list
                         List<String> likes = new ArrayList<>();
-                        Double createdAt = Double.valueOf(System.currentTimeMillis() / 1000l);
+                        Date currentTime = Calendar.getInstance().getTime();
+                        long createdAt = currentTime.getTime();
 
                         Map<String, Object> cloudPost = new HashMap<>();
                         cloudPost.put("id", newPostRef.getId());

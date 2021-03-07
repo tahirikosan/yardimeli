@@ -146,7 +146,7 @@ public class FeedActivity extends AppCompatActivity  implements PostAdapter.OnIt
             @Override
             public void onChanged(Post post) {
                 if(post.isSuccess()){
-                    /*if(post.isUserLiked()){
+                   /* if(post.isUserLiked()){
                         imageButton.setImageResource(R.drawable.ic_heart_red);
                     }else{
                         imageButton.setImageResource(R.drawable.ic_heart_black);

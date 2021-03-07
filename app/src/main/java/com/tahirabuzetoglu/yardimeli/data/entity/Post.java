@@ -16,7 +16,7 @@ public class Post implements Serializable {
     private String description;
     private List<String> likes;
     private Map<String, Map<String, List<String>>> Comments;
-    private Double date;
+    private long date;
     private String location;
     private String phoneNumber;
     @Exclude
@@ -33,7 +33,7 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(String id, String ownerID, String ownerName, String imageUrl, String ownerImageUrl, String description, List<String> likes, Double date, String location, String phoneNumber) {
+    public Post(String id, String ownerID, String ownerName, String imageUrl, String ownerImageUrl, String description, List<String> likes, long date, String location, String phoneNumber) {
         this.id = id;
         this.ownerID = ownerID;
         this.ownerName = ownerName;
@@ -126,11 +126,11 @@ public class Post implements Serializable {
         Comments = comments;
     }
 
-    public Double getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Double date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
